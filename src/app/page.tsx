@@ -1,8 +1,13 @@
 import Image from "next/image";
 import {
+  BarChart3,
+  Bell,
   CheckCircle2,
   ClipboardList,
+  CreditCard,
   FileSearch,
+  FileText,
+  FolderOpen,
   Globe2,
   LayoutDashboard,
   LockKeyhole,
@@ -11,33 +16,39 @@ import {
   Settings2,
   Smartphone,
   Sparkles,
+  UsersRound,
 } from "lucide-react";
 
-const screenshotSlots = [
+const memberFeatureCards = [
   {
-    eyebrow: "Member portal",
-    title: "Account, claims, documents, and family details in one place",
-    description:
-      "A secure self-service dashboard designed to reduce phone calls while giving members a clear view of their coverage activity.",
-    src: "/proposal/member-dashboard.jpg",
-    alt: "Example member dashboard interface",
+    icon: BarChart3,
+    title: "Track Sharing Activity",
+    text: "Members can see where requests, balances, and recent activity stand at a glance.",
   },
   {
-    eyebrow: "Mobile web app",
-    title: "Mobile-first access without an app store dependency",
-    description:
-      "Members can access ID cards, claim status, documents, support, and key actions from any smartphone.",
-    src: "/proposal/mobile-home.jpg",
-    alt: "Example mobile member app interface",
-    orientation: "mobile",
+    icon: ClipboardList,
+    title: "Submit Requests Online",
+    text: "A simple digital flow for sharing requests, documents, and follow-up information.",
   },
   {
-    eyebrow: "Admin operations",
-    title: "Operational command center for staff workflows",
-    description:
-      "A clean internal portal for applications, member records, document queues, reporting, and staff follow-up.",
-    src: "/proposal/admin-dashboard.jpg",
-    alt: "Example admin portal interface",
+    icon: CreditCard,
+    title: "Digital ID Card",
+    text: "Fast access to member ID information from desktop or mobile.",
+  },
+  {
+    icon: UsersRound,
+    title: "Manage Family Members",
+    text: "Household profiles, dependents, and related member information in one place.",
+  },
+  {
+    icon: FolderOpen,
+    title: "Documents & EOS",
+    text: "Organized access to uploaded files, statements, and explanation documents.",
+  },
+  {
+    icon: Bell,
+    title: "Real-Time Notifications",
+    text: "Updates for request status, documents, payments, and important member alerts.",
   },
 ];
 
@@ -203,68 +214,104 @@ export default function ProposalPage() {
         </div>
       </section>
 
+      <section className="relative overflow-hidden bg-[#f7fbfd] px-5 py-20 sm:px-8 lg:px-10">
+        <div className="absolute inset-0 bg-[url('/images/watermarkLightBlue-300x300-1.png')] bg-repeat opacity-[0.035]" />
+        <div className="relative mx-auto max-w-7xl">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#0f5d9c]">Member experience</p>
+            <h2 className="mt-3 text-4xl font-semibold tracking-normal text-[#102033] sm:text-5xl">
+              Your health sharing, simplified
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-[#587084]">
+              Members can manage everything from one intuitive dashboard: track requests, view
+              documents, manage family details, and access support from desktop or mobile.
+            </p>
+          </div>
+
+          <div className="mt-12 grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+            <a
+              href="/proposal/member-dashboard.jpg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-[1.6rem] border border-[#d9e8ee] bg-white p-4 shadow-2xl shadow-[#0f5d9c]/10"
+            >
+              <Image
+                src="/proposal/member-dashboard.jpg"
+                alt="Member portal dashboard preview"
+                width={1600}
+                height={934}
+                className="max-h-[610px] w-full rounded-[1.1rem] object-contain object-top"
+                priority
+              />
+            </a>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {memberFeatureCards.map((feature) => {
+                const Icon = feature.icon;
+                return (
+                  <div key={feature.title} className="rounded-xl border border-[#d9e8ee] bg-white/80 p-5 shadow-sm backdrop-blur">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#e8f4f8] text-[#0f5d9c]">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="mt-4 text-base font-semibold text-[#102033]">{feature.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-[#587084]">{feature.text}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#0f5d9c]">Visual direction</p>
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#0f5d9c]">Mobile web app</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-normal text-[#102033] sm:text-4xl">
-            Selected interface examples for the proposed platform
+            A native-feeling mobile experience without app store friction
+          </h2>
+        </div>
+        <div className="mt-10 rounded-2xl border border-[#d9e8ee] bg-[#e8f4f8] p-4 shadow-sm sm:p-6">
+          <div className="grid grid-cols-2 items-start gap-3 sm:grid-cols-3 lg:grid-cols-5">
+            {mobileScreens.map((screen) => (
+              <a key={screen.src} href={screen.src} target="_blank" rel="noopener noreferrer" className="block">
+                <Image
+                  src={screen.src}
+                  alt={screen.alt}
+                  width={390}
+                  height={747}
+                  className="mx-auto aspect-[9/16] max-h-[430px] w-auto rounded-[1rem] border-[6px] border-[#102033] bg-white object-contain object-top shadow-lg"
+                />
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#0f5d9c]">Admin operations</p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-normal text-[#102033] sm:text-4xl">
+            Operational command center for staff workflows
           </h2>
           <p className="mt-4 text-base leading-7 text-[#587084]">
-            These visuals are intended to show the quality, structure, and usability of the proposed
-            experience. Final screenshots can be curated and refined before this page is shared.
+            Staff can review members, applications, documents, queues, and follow-up work from a
+            clean internal dashboard.
           </p>
         </div>
-
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
-          {screenshotSlots.map((slot) => (
-            <article
-              key={slot.title}
-              className={[
-                "overflow-hidden rounded-lg border border-[#d9e8ee] bg-white shadow-sm",
-                "lg:col-span-3",
-              ].join(" ")}
-            >
-              <div className="bg-[#e8f4f8] p-4 sm:p-6">
-                {slot.orientation === "mobile" ? (
-                  <div className="grid grid-cols-2 items-start gap-3 sm:grid-cols-3 lg:grid-cols-5">
-                    {mobileScreens.map((screen) => (
-                      <a
-                        key={screen.src}
-                        href={screen.src}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block"
-                      >
-                        <Image
-                          src={screen.src}
-                          alt={screen.alt}
-                          width={390}
-                          height={747}
-                          className="mx-auto aspect-[9/16] max-h-[420px] w-auto rounded-[1rem] border-[6px] border-[#102033] bg-white object-contain object-top shadow-lg"
-                        />
-                      </a>
-                    ))}
-                  </div>
-                ) : (
-                  <a href={slot.src} target="_blank" rel="noopener noreferrer" className="block">
-                    <Image
-                      src={slot.src}
-                      alt={slot.alt}
-                      width={1600}
-                      height={934}
-                      className="max-h-[760px] w-full rounded-md bg-white object-contain object-top shadow-sm"
-                    />
-                  </a>
-                )}
-              </div>
-              <div className="p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0f5d9c]">{slot.eyebrow}</p>
-                <h3 className="mt-2 text-xl font-semibold text-[#102033]">{slot.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-[#587084]">{slot.description}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        <a
+          href="/proposal/admin-dashboard.jpg"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-10 block rounded-2xl border border-[#d9e8ee] bg-white p-4 shadow-xl shadow-[#0f5d9c]/10 sm:p-6"
+        >
+          <Image
+            src="/proposal/admin-dashboard.jpg"
+            alt="Admin portal dashboard preview"
+            width={1600}
+            height={940}
+            className="max-h-[760px] w-full rounded-xl object-contain object-top"
+          />
+        </a>
       </section>
 
       <section className="border-y border-[#d9e8ee] bg-white">
