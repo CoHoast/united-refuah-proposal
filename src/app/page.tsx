@@ -1,8 +1,5 @@
 import Image from "next/image";
 import {
-  ArrowRight,
-  Bot,
-  CheckCircle2,
   ClipboardList,
   FileSearch,
   LayoutDashboard,
@@ -11,7 +8,6 @@ import {
   MonitorSmartphone,
   Smartphone,
   Sparkles,
-  Users,
 } from "lucide-react";
 
 const screenshotSlots = [
@@ -99,11 +95,6 @@ const aiLayer = [
     title: "Member Assistant",
     text: "A guided AI assistant inside the member portal for common questions, document help, and next-step support.",
   },
-  {
-    icon: Bot,
-    title: "Admin Intelligence",
-    text: "AI-assisted queues, summaries, flags, and suggested follow-up actions for internal staff workflows.",
-  },
 ];
 
 const phases = [
@@ -127,13 +118,6 @@ const phases = [
     title: "Launch and Support",
     text: "Production hardening, training, launch support, monitoring, iteration, and ongoing platform care.",
   },
-];
-
-const investment = [
-  "One-time build investment for member portal, mobile web app, and admin portal",
-  "Optional AI build package for document processing and portal assistant",
-  "Monthly platform/support fee for hosting, monitoring, maintenance, updates, and managed improvements",
-  "Usage-based AI/document automation fee if advanced processing volume grows",
 ];
 
 export default function ProposalPage() {
@@ -193,21 +177,17 @@ export default function ProposalPage() {
             <div className="relative">
               <div className="rounded-[2rem] border border-white/18 bg-white/12 p-3 shadow-2xl backdrop-blur">
                 <div className="overflow-hidden rounded-[1.4rem] bg-white">
-                  <Image
-                    src="/proposal/member-dashboard.jpg"
-                    alt="Member portal concept preview"
-                    width={1080}
-                    height={760}
-                    className="aspect-[1.25/1] w-full object-cover object-top"
-                    priority
-                  />
+                  <a href="/proposal/member-dashboard.jpg" target="_blank" rel="noopener noreferrer">
+                    <Image
+                      src="/proposal/member-dashboard.jpg"
+                      alt="Member portal concept preview"
+                      width={1600}
+                      height={934}
+                      className="max-h-[640px] w-full bg-white object-contain object-top"
+                      priority
+                    />
+                  </a>
                 </div>
-              </div>
-              <div className="absolute -bottom-7 left-8 right-8 rounded-2xl border border-white/20 bg-white px-5 py-4 shadow-xl sm:left-auto sm:right-8 sm:w-80">
-                <p className="text-sm font-semibold text-[#102033]">Concept preview</p>
-                <p className="mt-1 text-sm leading-6 text-[#587084]">
-                  Screenshots can be swapped with selected examples before sharing.
-                </p>
               </div>
             </div>
           </div>
@@ -232,31 +212,40 @@ export default function ProposalPage() {
               key={slot.title}
               className={[
                 "overflow-hidden rounded-lg border border-[#d9e8ee] bg-white shadow-sm",
-                slot.orientation === "mobile" ? "lg:col-span-3" : "",
+                "lg:col-span-3",
               ].join(" ")}
             >
-              <div className="bg-[#e8f4f8] p-3">
+              <div className="bg-[#e8f4f8] p-4 sm:p-6">
                 {slot.orientation === "mobile" ? (
                   <div className="grid grid-cols-2 items-start gap-3 sm:grid-cols-3 lg:grid-cols-5">
                     {mobileScreens.map((screen) => (
-                      <Image
+                      <a
                         key={screen.src}
-                        src={screen.src}
-                        alt={screen.alt}
-                        width={390}
-                        height={747}
-                        className="mx-auto aspect-[9/16] max-h-[360px] w-auto rounded-[1rem] border-[6px] border-[#102033] bg-white object-contain object-top shadow-lg"
-                      />
+                        href={screen.src}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                      >
+                        <Image
+                          src={screen.src}
+                          alt={screen.alt}
+                          width={390}
+                          height={747}
+                          className="mx-auto aspect-[9/16] max-h-[420px] w-auto rounded-[1rem] border-[6px] border-[#102033] bg-white object-contain object-top shadow-lg"
+                        />
+                      </a>
                     ))}
                   </div>
                 ) : (
-                  <Image
-                    src={slot.src}
-                    alt={slot.alt}
-                    width={900}
-                    height={620}
-                    className="aspect-[1.18/1] w-full rounded-md object-cover object-top"
-                  />
+                  <a href={slot.src} target="_blank" rel="noopener noreferrer" className="block">
+                    <Image
+                      src={slot.src}
+                      alt={slot.alt}
+                      width={1600}
+                      height={934}
+                      className="max-h-[760px] w-full rounded-md bg-white object-contain object-top shadow-sm"
+                    />
+                  </a>
                 )}
               </div>
               <div className="p-5">
@@ -304,11 +293,11 @@ export default function ProposalPage() {
           <div className="rounded-lg bg-[#102033] p-7 text-white sm:p-9">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#96d7cf]">Optional AI layer</p>
             <h2 className="mt-3 text-3xl font-semibold tracking-normal sm:text-4xl">
-              AI features can be packaged as a higher-value phase.
+              AI features focused on document processing and member support.
             </h2>
             <p className="mt-4 text-base leading-7 text-white/74">
-              The AI layer should be positioned separately from the base portal build so United REFUAH
-              can clearly see the added automation value.
+              The AI package can help staff process documents faster while giving members guided
+              support inside the portal.
             </p>
           </div>
 
@@ -352,52 +341,18 @@ export default function ProposalPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#0f5d9c]">Investment model</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-normal text-[#102033] sm:text-4xl">
-              Structure the proposal as a build fee plus recurring platform care.
-            </h2>
-            <p className="mt-4 text-base leading-7 text-[#587084]">
-              This keeps the one-time implementation distinct from the ongoing value of hosting,
-              support, monitoring, improvements, and AI/document usage.
-            </p>
-          </div>
-
-          <div className="rounded-lg border border-[#d9e8ee] bg-white p-6 shadow-sm sm:p-8">
-            <div className="grid gap-4">
-              {investment.map((item) => (
-                <div key={item} className="flex gap-3">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#18756c]" />
-                  <p className="text-base leading-7 text-[#33495c]">{item}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-8 rounded-lg bg-[#f7fbfd] p-5">
-              <p className="text-sm font-semibold uppercase tracking-[0.12em] text-[#0f5d9c]">Suggested framing</p>
-              <p className="mt-3 text-lg font-semibold text-[#102033]">
-                Base platform build + optional AI package + monthly managed platform fee
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="bg-[#0f5d9c] text-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-12 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
           <div>
-            <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white/70">
-              <Users className="h-4 w-4" />
-              Proposed next step
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-white/70">
+              Platform discussion
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-normal">
-              Review scope, confirm priorities, and finalize implementation pricing.
+              Review the portal experience, confirm priorities, and align on the build scope.
             </h2>
           </div>
-          <div className="inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-semibold text-[#0f5d9c]">
-            Ready for discussion
-            <ArrowRight className="h-4 w-4" />
+          <div className="inline-flex rounded-md bg-white px-5 py-3 text-sm font-semibold text-[#0f5d9c]">
+            Private proposal preview
           </div>
         </div>
       </section>
