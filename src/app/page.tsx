@@ -156,10 +156,10 @@ export default function ProposalPage() {
           <header className="flex items-center justify-between gap-6">
             <div className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-lg shadow-black/10">
               <Image
-                src="/images/united-refuah-logo-full.svg"
+                src="/images/ur-logo-header.png"
                 alt="United Refuah"
-                width={190}
-                height={78}
+                width={222}
+                height={90}
                 className="h-12 w-auto"
                 priority
               />
