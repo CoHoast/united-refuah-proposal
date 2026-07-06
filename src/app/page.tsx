@@ -170,7 +170,7 @@ export default function ProposalPage() {
             </div>
           </header>
 
-          <div className="grid flex-1 items-center gap-10 py-14 lg:grid-cols-[1.02fr_0.98fr] lg:py-16">
+          <div className="grid flex-1 items-center gap-10 py-14 lg:grid-cols-[0.88fr_1.12fr] lg:py-16">
             <div>
               <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm text-white/85">
                 <MonitorSmartphone className="h-4 w-4" />
@@ -195,7 +195,7 @@ export default function ProposalPage() {
             </div>
 
             <div className="relative">
-              <div className="rounded-[2rem] border border-white/18 bg-white/12 p-3 shadow-2xl backdrop-blur">
+              <div className="rounded-[2rem] border border-white/18 bg-white/12 p-3 shadow-2xl backdrop-blur lg:-mr-10 xl:-mr-16">
                 <div className="overflow-hidden rounded-[1.4rem] bg-white">
                   <a href="/proposal/member-dashboard.jpg" target="_blank" rel="noopener noreferrer">
                     <Image
@@ -203,7 +203,7 @@ export default function ProposalPage() {
                       alt="Member portal concept preview"
                       width={1600}
                       height={934}
-                      className="max-h-[640px] w-full bg-white object-contain object-top"
+                      className="max-h-[740px] w-full bg-white object-contain object-top"
                       priority
                     />
                   </a>
