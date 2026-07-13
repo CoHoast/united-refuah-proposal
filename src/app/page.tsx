@@ -1,22 +1,22 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import {
   BarChart3,
   Bell,
-  CheckCircle2,
   ClipboardList,
   CreditCard,
   FileSearch,
-  FileText,
   FolderOpen,
-  Globe2,
   LayoutDashboard,
   LockKeyhole,
   MessageCircle,
   MonitorSmartphone,
-  Settings2,
   Smartphone,
   Sparkles,
   UsersRound,
+  X,
 } from "lucide-react";
 
 const memberFeatureCards = [
@@ -75,6 +75,11 @@ const mobileScreens = [
   },
 ];
 
+type PreviewImage = {
+  src: string;
+  alt: string;
+};
+
 const coreBuild = [
   {
     icon: LayoutDashboard,
@@ -96,14 +101,6 @@ const coreBuild = [
     title: "Secure Infrastructure",
     text: "Production deployment, authentication, role-based access, audit-friendly workflows, and structured data management.",
   },
-];
-
-const applicationIntake = [
-  "Refreshed public marketing website aligned with United REFUAH's brand",
-  "Guided step-by-step application flow for prospective members",
-  "Configurable eligibility rules and review parameters set by United REFUAH",
-  "Suggested approve / deny / manual review labels for staff triage",
-  "Admin queue for final human review and decision-making",
 ];
 
 const aiLayer = [
@@ -143,6 +140,32 @@ const phases = [
 ];
 
 export default function ProposalPage() {
+  const [activePreview, setActivePreview] = useState<PreviewImage | null>(null);
+
+  useEffect(() => {
+    if (!activePreview) {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActivePreview(null);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [activePreview]);
+
+  const openPreview = (preview: PreviewImage) => {
+    setActivePreview(preview);
+  };
+
   return (
     <main className="min-h-screen bg-[#f7fbfd] text-[#102033]">
       <section className="relative overflow-hidden bg-[#0f5d9c] text-white">
@@ -197,7 +220,17 @@ export default function ProposalPage() {
             <div className="relative">
               <div className="rounded-[2rem] border border-white/18 bg-white/12 p-3 shadow-2xl backdrop-blur lg:-mr-10 xl:-mr-16">
                 <div className="overflow-hidden rounded-[1.4rem] bg-white">
-                  <a href="/proposal/member-dashboard.jpg" target="_blank" rel="noopener noreferrer">
+                  <button
+                    type="button"
+                    aria-label="Open member portal preview"
+                    onClick={() =>
+                      openPreview({
+                        src: "/proposal/member-dashboard.jpg",
+                        alt: "Member portal concept preview",
+                      })
+                    }
+                    className="block w-full cursor-zoom-in text-left"
+                  >
                     <Image
                       src="/proposal/member-dashboard.jpg"
                       alt="Member portal concept preview"
@@ -206,7 +239,7 @@ export default function ProposalPage() {
                       className="max-h-[740px] w-full bg-white object-contain object-top"
                       priority
                     />
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -229,10 +262,15 @@ export default function ProposalPage() {
           </div>
 
           <div className="mt-12 grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-            <a
-              href="/proposal/member-dashboard.jpg"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              aria-label="Open member portal dashboard preview"
+              onClick={() =>
+                openPreview({
+                  src: "/proposal/member-dashboard.jpg",
+                  alt: "Member portal dashboard preview",
+                })
+              }
               className="block rounded-[1.6rem] border border-[#d9e8ee] bg-white p-4 shadow-2xl shadow-[#0f5d9c]/10"
             >
               <Image
@@ -243,7 +281,7 @@ export default function ProposalPage() {
                 className="max-h-[610px] w-full rounded-[1.1rem] object-contain object-top"
                 priority
               />
-            </a>
+            </button>
 
             <div className="grid gap-4 sm:grid-cols-2">
               {memberFeatureCards.map((feature) => {
@@ -273,7 +311,13 @@ export default function ProposalPage() {
         <div className="mt-10 rounded-2xl border border-[#d9e8ee] bg-[#e8f4f8] p-4 shadow-sm sm:p-6">
           <div className="grid grid-cols-2 items-start gap-3 sm:grid-cols-3 lg:grid-cols-5">
             {mobileScreens.map((screen) => (
-              <a key={screen.src} href={screen.src} target="_blank" rel="noopener noreferrer" className="block">
+              <button
+                key={screen.src}
+                type="button"
+                aria-label={`Open ${screen.alt}`}
+                onClick={() => openPreview(screen)}
+                className="block cursor-zoom-in"
+              >
                 <Image
                   src={screen.src}
                   alt={screen.alt}
@@ -281,7 +325,7 @@ export default function ProposalPage() {
                   height={747}
                   className="mx-auto aspect-[9/16] max-h-[430px] w-auto rounded-[1rem] border-[6px] border-[#102033] bg-white object-contain object-top shadow-lg"
                 />
-              </a>
+              </button>
             ))}
           </div>
         </div>
@@ -298,10 +342,15 @@ export default function ProposalPage() {
             clean internal dashboard.
           </p>
         </div>
-        <a
-          href="/proposal/admin-dashboard.jpg"
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
+          aria-label="Open admin portal dashboard preview"
+          onClick={() =>
+            openPreview({
+              src: "/proposal/admin-dashboard.jpg",
+              alt: "Admin portal dashboard preview",
+            })
+          }
           className="mt-10 block rounded-2xl border border-[#d9e8ee] bg-white p-4 shadow-xl shadow-[#0f5d9c]/10 sm:p-6"
         >
           <Image
@@ -311,7 +360,7 @@ export default function ProposalPage() {
             height={940}
             className="max-h-[760px] w-full rounded-xl object-contain object-top"
           />
-        </a>
+        </button>
       </section>
 
       <section className="border-y border-[#d9e8ee] bg-white">
@@ -340,58 +389,6 @@ export default function ProposalPage() {
                 </div>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#0f5d9c]">
-              Public website + intake
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-normal text-[#102033] sm:text-4xl">
-              A front-facing website with guided application review.
-            </h2>
-            <p className="mt-4 text-base leading-7 text-[#587084]">
-              The public site can be rebuilt around a clear application journey, then route new
-              applications into an admin review flow with suggested labels based on United REFUAH's
-              own rules and parameters.
-            </p>
-          </div>
-
-          <div className="rounded-lg border border-[#d9e8ee] bg-white p-6 shadow-sm sm:p-8">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-lg bg-[#e8f4f8] p-5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white text-[#0f5d9c]">
-                  <Globe2 className="h-5 w-5" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-[#102033]">Marketing Website</h3>
-                <p className="mt-2 text-sm leading-6 text-[#587084]">
-                  A refreshed public experience that explains the offering and moves prospective
-                  members into the application flow.
-                </p>
-              </div>
-              <div className="rounded-lg bg-[#e8f4f8] p-5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white text-[#0f5d9c]">
-                  <Settings2 className="h-5 w-5" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-[#102033]">Rules-Based Triage</h3>
-                <p className="mt-2 text-sm leading-6 text-[#587084]">
-                  Applications can receive suggested approve, deny, or manual review labels while
-                  final decisions stay with United REFUAH staff.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-6 grid gap-3">
-              {applicationIntake.map((item) => (
-                <div key={item} className="flex gap-3">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#18756c]" />
-                  <p className="text-sm leading-6 text-[#33495c]">{item}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -464,6 +461,37 @@ export default function ProposalPage() {
           </div>
         </div>
       </section>
+
+      {activePreview && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#07111d]/88 p-3 backdrop-blur-sm sm:p-6"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Screenshot preview"
+          onClick={() => setActivePreview(null)}
+        >
+          <div className="relative max-h-[94vh] w-full max-w-7xl" onClick={(event) => event.stopPropagation()}>
+            <button
+              type="button"
+              aria-label="Close screenshot preview"
+              onClick={() => setActivePreview(null)}
+              className="absolute right-2 top-2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#102033] shadow-lg transition hover:bg-[#e8f4f8] focus:outline-none focus:ring-2 focus:ring-[#96d7cf]"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <div className="overflow-hidden rounded-xl bg-white shadow-2xl">
+              <Image
+                src={activePreview.src}
+                alt={activePreview.alt}
+                width={1800}
+                height={1200}
+                className="max-h-[94vh] w-full object-contain object-top"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
