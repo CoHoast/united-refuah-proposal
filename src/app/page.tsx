@@ -492,7 +492,7 @@ export default function ProposalPage() {
               className={
                 activePreviewIsMobile
                   ? "overflow-hidden rounded-xl bg-[#e8f4f8] p-5 shadow-2xl sm:p-8"
-                  : "overflow-hidden rounded-xl bg-white shadow-2xl"
+                  : "overflow-hidden rounded-xl bg-[#e8f4f8] p-4 shadow-2xl sm:p-6"
               }
             >
               <Image
@@ -503,7 +503,7 @@ export default function ProposalPage() {
                 className={
                   activePreviewIsMobile
                     ? "mx-auto max-h-[86vh] w-auto max-w-full rounded-[1rem] object-contain object-top shadow-xl"
-                    : "max-h-[96vh] w-full object-contain object-top"
+                    : "max-h-[92vh] w-full rounded-lg object-contain object-top shadow-xl"
                 }
                 priority
               />
