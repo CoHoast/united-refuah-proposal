@@ -472,7 +472,14 @@ export default function ProposalPage() {
           aria-label="Screenshot preview"
           onClick={() => setActivePreview(null)}
         >
-          <div className="relative max-h-[94vh] w-full max-w-7xl" onClick={(event) => event.stopPropagation()}>
+          <div
+            className={
+              activePreviewIsMobile
+                ? "relative max-h-[94vh] w-full max-w-7xl"
+                : "relative max-h-[96vh] w-full max-w-[96vw]"
+            }
+            onClick={(event) => event.stopPropagation()}
+          >
             <button
               type="button"
               aria-label="Close screenshot preview"
@@ -496,7 +503,7 @@ export default function ProposalPage() {
                 className={
                   activePreviewIsMobile
                     ? "mx-auto max-h-[86vh] w-auto max-w-full rounded-[1rem] object-contain object-top shadow-xl"
-                    : "max-h-[94vh] w-full object-contain object-top"
+                    : "max-h-[96vh] w-full object-contain object-top"
                 }
                 priority
               />
