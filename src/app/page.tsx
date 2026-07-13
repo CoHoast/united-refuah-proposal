@@ -166,6 +166,8 @@ export default function ProposalPage() {
     setActivePreview(preview);
   };
 
+  const activePreviewIsMobile = activePreview?.src.includes("/mobile-") ?? false;
+
   return (
     <main className="min-h-screen bg-[#f7fbfd] text-[#102033]">
       <section className="relative overflow-hidden bg-[#0f5d9c] text-white">
@@ -479,13 +481,23 @@ export default function ProposalPage() {
             >
               <X className="h-5 w-5" />
             </button>
-            <div className="overflow-hidden rounded-xl bg-white shadow-2xl">
+            <div
+              className={
+                activePreviewIsMobile
+                  ? "overflow-hidden rounded-xl bg-[#e8f4f8] p-5 shadow-2xl sm:p-8"
+                  : "overflow-hidden rounded-xl bg-white shadow-2xl"
+              }
+            >
               <Image
                 src={activePreview.src}
                 alt={activePreview.alt}
                 width={1800}
                 height={1200}
-                className="max-h-[94vh] w-full object-contain object-top"
+                className={
+                  activePreviewIsMobile
+                    ? "mx-auto max-h-[86vh] w-auto max-w-full rounded-[1rem] object-contain object-top shadow-xl"
+                    : "max-h-[94vh] w-full object-contain object-top"
+                }
                 priority
               />
             </div>
